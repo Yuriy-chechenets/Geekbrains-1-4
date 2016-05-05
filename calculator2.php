@@ -1,12 +1,29 @@
 <?php
 header("Content-Type: text/html; charset=utf-8");
 $timeBegin=microtime(true);
-/**
- * Created by PhpStorm.
- * User: NotePad.by
- * Date: 05.05.2016
- * Time: 3:05
- */
+if(isset($_POST['var_1']) && isset($_POST['var_2']) && is_numeric($_POST['var_1']) && is_numeric($_POST['var_2']))
+{
+    $operation = $_POST['operation'];
+    switch ($operation)
+    {
+        case 1: $operationChar = "+"; $answer = $_POST['var_1'] + $_POST['var_2']; break;
+        case 2: $operationChar = "-"; $answer = $_POST['var_1'] - $_POST['var_2']; break;
+        case 3: $operationChar = "*"; $answer = $_POST['var_1'] * $_POST['var_2']; break;
+        case 4: $operationChar = "/"; $answer = $_POST['var_1'] / $_POST['var_2']; break;
+        case 'Очистить': $operationChar = ""; $answer = ''; break;
+
+    }
+    /* Эта хрень не работает )))))
+    echo $_POST['operation']."<br>";
+    if (($_POST['operation']) == "+") { $operationChar = "+"; $answer = $_POST['var_1'] + $_POST['var_2']; }
+    if (($_POST['operation']) == "-") { $operationChar = "-"; $answer = $_POST['var_1'] - $_POST['var_2']; }
+    if (($_POST['operation']) == "*") { $operationChar = "*"; $answer =( $_POST['var_1']) * ($_POST['var_2']); }
+    if (($_POST['operation']) == "/") { $operationChar = "/"; $answer = $_POST['var_1'] / $_POST['var_2']; }
+    else $answer="Введены некорректные данные";
+    // print_r($_POST);
+    */
+}
+
 
 ?>
 
@@ -21,17 +38,14 @@ $timeBegin=microtime(true);
         <?php if(isset($answer)) echo "=";?>
         <input type="text" name="answer" maxlength=15 value="<?php if(isset($answer)) {echo $answer;} else echo "";?>"/>
         <br>
-        <input type="submit" name="sum" value="+">
-        <input type="submit" name="dif" value="-">
-        <input type="submit" name="mult" value="*">
-        <input type="submit" name="div" value="/">
-
-
-
-<?php
-
-echo "<br>скрипт выполнился за ". (microtime(true)-$timeBegin) . " секунд";
-?>
-</fieldset>
+        <button type="submit" name="operation" value="1">+</button>
+        <button type="submit" name="operation" value="2">-</button>
+        <button type="submit" name="operation" value="3">*</button>
+        <button type="submit" name="operation" value="4">/</button>
+        <button type="submit" name="operation" value="5">Очистить</button>
+    </fieldset>
 </form>
 </html>
+<?php
+echo "<br>скрипт выполнился за ". (microtime(true)-$timeBegin) . " секунд";
+?>
